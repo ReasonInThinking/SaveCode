@@ -1,17 +1,50 @@
-# my_app
+# SaveCode
 
-A new Flutter project.
+Лёгкий и быстрый офлайн-менеджер сниппетов, команд и пошаговых инструкций для **Linux (x86_64)**, написанный на Flutter.
 
-## Getting Started
+<img width="1272" height="747" alt="SaveCode" src="https://github.com/user-attachments/assets/e6c8e893-23b1-40d3-bbeb-c158620ac586" />
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Возможности
+- **Мульти-сниппеты:** объединяйте несколько блоков кода или терминальных команд с подзаголовками внутри одной карточки.
+- **Мгновенный поиск:** фильтрация в реальном времени по заголовкам, шагам, тегам и тексту самого кода.
+- **Копирование в один клик:** отдельная кнопка копирования в буфер обмена для каждого блока кода.
+- **Локальное хранение и бэкапы:** автоматическое сохранение базы в `~/.snippet_vault.json`, а также экспорт и восстановление резервных копий с датой.
+- **Оптимизация под Linux:** встроенный запуск через `GDK_BACKEND=x11` для плавной работы и разворачивания окна на весь экран без зависаний (в том числе на системах с Wayland).
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Быстрая установка (Linux x86_64)
+
+Приложение опубликовано в формате автономного **AppImage** и подходит для 64-битных дистрибутивов Linux (Ubuntu, Zorin OS, Linux Mint, Debian, Fedora, Arch и др.).
+
+### 1. Скачивание файлов
+1. Перейдите во вкладку **[Releases](../../releases)** справа и скачайте файл **`SaveCode-x86_64.AppImage`**.
+2. Также сохраните файл **`logo.png`** из корня этого репозитория, если хотите добавить программу в меню приложений со штатной иконкой.
+3. Создайте удобную папку в домашней директории (например, `~/saver`) и поместите туда оба файла (`SaveCode-x86_64.AppImage` и `logo.png`).
+
+### 2. Права на запуск
+Откройте терминал в папке с файлами и разрешите выполнение:
+```bash
+chmod +x ~/saver/SaveCode-x86_64.AppImage
+```
+*(После этого программу уже можно запускать двойным кликом мыши).*
+
+### 3. Добавление в меню приложений Linux (Zorin OS, Ubuntu, Mint)
+Чтобы **SaveCode** отображался в главном меню с иконкой и закреплялся на панели задач, создайте ярлык `.desktop` одной командой (замените `ВАШЕ_ИМЯ` на имя вашего пользователя в системе):
+
+```bash
+cat << 'EOF' > ~/.local/share/applications/savecode.desktop
+[Desktop Entry]
+Type=Application
+Name=SaveCode
+Comment=Менеджер сниппетов и инструкций кода
+Exec=/home/ВАШЕ_ИМЯ/saver/SaveCode-x86_64.AppImage
+Icon=/home/ВАШЕ_ИМЯ/saver/logo.png
+Categories=Development;Utility;
+Terminal=false
+StartupWMClass=SaveCode
+EOF
+
+update-desktop-database ~/.local/share/applications/
+```
